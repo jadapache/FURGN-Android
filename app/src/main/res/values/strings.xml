@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">FURGN BI</string>
+    <string name="notification_channel_id">furgn_mqtt_channel</string>
+    <string name="notification_channel_name">FURGN BI Service</string>
+    <string name="notification_title">FURGN BI Activo</string>
+    <string name="notification_text">Monitoreando furgón en tiempo real</string>
+</resources>
