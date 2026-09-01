@@ -34,4 +34,8 @@ abstract class RepositoryModule {
     @Binds
     @Singleton
     abstract fun bindAppConfigRepository(impl: AppConfigRepositoryImpl): AppConfigRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindMqttRepository(impl: MqttRepositoryImpl): MqttRepository
 }
