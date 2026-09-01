@@ -77,6 +77,7 @@ class EvaluateAlarmsUseCase @Inject constructor(
                         triggeredAt = reading.capturedAt
                     ))
                 }
+                Unit
             }
 
             // ── Humidity evaluation ─────────────────────────────────────────
