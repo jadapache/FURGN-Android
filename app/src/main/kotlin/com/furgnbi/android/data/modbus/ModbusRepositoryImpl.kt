@@ -89,7 +89,7 @@ class ModbusRepositoryImpl @Inject constructor(
     override suspend fun writeHoldingRegisterFloat(address: Int, value: Float) {
         val offset = address - 40001
         val words = IEEE754Decoder.encodeAsList(value)
-        client.writeMultipleRegisters(startAddress = offset, values = words)
+        client.writeMultipleRegisters(address = offset, values = words)
     }
 
     override suspend fun writeHoldingRegisterUInt16(address: Int, value: Int) {
