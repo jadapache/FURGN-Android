@@ -1,5 +1,10 @@
 package com.furgnbi.android.data.local
 
+// Nota de arquitectura (Gap 3): PlcParameterSeeder reside en data/local/ porque su única
+// responsabilidad es insertar datos iniciales en Room. No se comunica directamente con el
+// PLC vía Modbus, por lo que data/modbus/ no sería semánticamente correcto.
+// El seeder es invocado desde FurgnBiApplication.onCreate() antes del primer ciclo de polling.
+
 import android.util.Log
 import com.furgnbi.android.data.local.dao.PlcParameterDao
 import com.furgnbi.android.data.local.entity.PlcParameterEntity
@@ -15,19 +20,21 @@ class PlcParameterSeeder @Inject constructor(
         private const val TAG = "PlcParameterSeeder"
 
         val DEFAULT_PARAMETERS: List<PlcParameterEntity> = listOf(
+            // Parámetros 1 y 2: rango avícola (10–45 °C) para transporte de pollitos de un día
+            // (Gap 4: corregido de rango frigorífico -30/30 °C al rango del blueprint)
             PlcParameterEntity(
                 id = 1,
                 name = "Setpoint Temp Zona 1",
                 modbusAddress = 40001,
                 modbusDataType = ModbusDataType.REAL.name,
                 registerCount = 2,
-                minValue = -30.0,
-                maxValue = 30.0,
+                minValue = 10.0,
+                maxValue = 45.0,
                 unit = "°C",
-                defaultValue = -18.0,
-                currentValue = -18.0,
+                defaultValue = 25.0,
+                currentValue = 25.0,
                 isReadOnly = false,
-                description = "Temperatura deseada en zona de congelados"
+                description = "Temperatura objetivo zona 1 — rango avícola (pollitos 1 día)"
             ),
             PlcParameterEntity(
                 id = 2,
@@ -35,13 +42,13 @@ class PlcParameterSeeder @Inject constructor(
                 modbusAddress = 40003,
                 modbusDataType = ModbusDataType.REAL.name,
                 registerCount = 2,
-                minValue = -30.0,
-                maxValue = 30.0,
+                minValue = 10.0,
+                maxValue = 45.0,
                 unit = "°C",
-                defaultValue = 4.0,
-                currentValue = 4.0,
+                defaultValue = 25.0,
+                currentValue = 25.0,
                 isReadOnly = false,
-                description = "Temperatura deseada en zona de refrigerados"
+                description = "Temperatura objetivo zona 2 — rango avícola (pollitos 1 día)"
             ),
             PlcParameterEntity(
                 id = 3,
